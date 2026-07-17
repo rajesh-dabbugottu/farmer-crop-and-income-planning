@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/recommend";
+const API_URL = "https://agriplan-ai-api.onrender.com/recommend";
 const USE_DEMO_MODE = true;
 const DISPLAY_SCALE = 100;
 
