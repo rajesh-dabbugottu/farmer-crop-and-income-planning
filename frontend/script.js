@@ -1,5 +1,5 @@
 const API_URL = "https://agriplan-ai-api.onrender.com/recommend";
-const USE_DEMO_MODE = false;
+const USE_DEMO_MODE = true;
 const DISPLAY_SCALE = 100;
 
 const form = document.getElementById("recommendationForm");
