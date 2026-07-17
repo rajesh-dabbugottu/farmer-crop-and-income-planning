@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriPlan AI | Crop Recommendation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="#home" class="brand">
+      <span class="brand-icon">🌾</span>
+      <span>
+        <strong>AgriPlan AI</strong>
+        <small>Farmer Crop & Income Planning</small>
+      </span>
+    </a>
+
+    <button id="menuButton" class="menu-button" aria-label="Open navigation">☰</button>
+
+    <nav id="navLinks" class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#recommendation">Recommendation</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">PPO Reinforcement Learning Project</span>
+        <h1>Smarter crop planning for better farming decisions.</h1>
+        <p>
+          Enter rainfall, yield, market price, available investment and previous crop
+          to receive an AI-supported crop recommendation and financial estimate.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-button" href="#recommendation">Get Recommendation</a>
+          <a class="secondary-button" href="#workflow">How It Works</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <span class="hero-card-badge">AI Crop Planner</span>
+        <div class="hero-card-icon">🌱</div>
+        <h2>Climate + Market + Finance</h2>
+        <p>Powered by a trained PPO reinforcement learning policy.</p>
+        <div class="progress"><span></span></div>
+      </div>
+    </section>
+
+    <section id="recommendation" class="recommendation-section">
+      <div class="section-heading">
+        <span class="eyebrow">Recommendation Tool</span>
+        <h2>Enter your farm information</h2>
+        <p>The frontend works in demo mode and is ready to connect to FastAPI.</p>
+      </div>
+
+      <div class="app-grid">
+        <form id="recommendationForm" class="form-card">
+          <div class="form-grid">
+            <label>
+              <span>Annual Rainfall</span>
+              <div class="input-wrap">
+                <input id="rainfall" type="number" min="0" step="0.01" value="850" required>
+                <small>mm</small>
+              </div>
+            </label>
+
+            <label>
+              <span>Expected Yield</span>
+              <div class="input-wrap">
+                <input id="expectedYield" type="number" min="0" step="0.01" value="3.8" required>
+                <small>t/ha</small>
+              </div>
+            </label>
+
+            <label>
+              <span>Market Price</span>
+              <div class="input-wrap">
+                <input id="marketPrice" type="number" min="0" step="0.01" value="2400" required>
+                <small>₹/q</small>
+              </div>
+            </label>
+
+            <label>
+              <span>Available Investment</span>
+              <div class="input-wrap">
+                <input id="savings" type="number" min="0" step="1" value="150000" required>
+                <small>₹</small>
+              </div>
+            </label>
+
+            <label>
+              <span>Previous Crop</span>
+              <select id="previousCrop">
+                <option value="None">None</option>
+                <option>Rice</option>
+                <option>Wheat</option>
+                <option>Maize</option>
+                <option>Banana</option>
+                <option>Cotton</option>
+                <option>Sugarcane</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Current Planning Year</span>
+              <select id="currentYear">
+                <option value="0">Year 1</option>
+                <option value="1">Year 2</option>
+                <option value="2">Year 3</option>
+                <option value="3">Year 4</option>
+                <option value="4">Year 5</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button id="submitButton" class="submit-button" type="submit">
+              <span id="buttonText">Recommend Crop</span>
+              <span>→</span>
+            </button>
+            <button class="reset-button" type="reset">Reset</button>
+          </div>
+
+          <p id="formMessage" class="form-message"></p>
+        </form>
+
+        <aside class="result-card">
+          <div id="emptyResult" class="empty-result">
+            <div>🌾</div>
+            <h3>Your recommendation will appear here</h3>
+            <p>Submit the form to view the selected crop and financial results.</p>
+          </div>
+
+          <div id="resultContent" class="result-content hidden">
+            <div class="result-header">
+              <div>
+                <span>Recommended Crop</span>
+                <h2 id="recommendedCrop">—</h2>
+              </div>
+              <span class="badge">PPO Selected</span>
+            </div>
+
+            <p id="recommendationExplanation" class="recommendation-note"></p>
+
+            <div class="metrics-grid">
+              <article>
+                <span>Estimated Profit</span>
+                <strong id="estimatedProfit">₹0.00</strong>
+              </article>
+              <article>
+                <span>Rotation Penalty</span>
+                <strong id="rotationPenalty">₹0.00</strong>
+              </article>
+              <article>
+                <span>Annual Living Cost</span>
+                <strong id="livingCost">₹0.00</strong>
+              </article>
+              <article>
+                <span>Net Income</span>
+                <strong id="netIncome">₹0.00</strong>
+              </article>
+            </div>
+
+            <div class="savings-box">
+              <span>Updated Savings</span>
+              <strong id="updatedSavings">₹0.00</strong>
+              <small id="trendIndicator">—</small>
+            </div>
+
+            <div class="context-box">
+              <h3>Closest Training Context</h3>
+              <div class="context-grid">
+                <div><span>Rainfall</span><strong id="matchedRainfall">—</strong></div>
+                <div><span>Yield</span><strong id="matchedYield">—</strong></div>
+                <div><span>Market Price</span><strong id="matchedPrice">—</strong></div>
+                <div><span>Matched Crop</span><strong id="matchedCrop">—</strong></div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="workflow" class="workflow-section">
+      <div class="section-heading light">
+        <span class="eyebrow">System Workflow</span>
+        <h2>How the recommendation works</h2>
+      </div>
+
+      <div class="steps">
+        <article><span>01</span><h3>Enter Inputs</h3><p>Provide farm, climate, market and financial information.</p></article>
+        <article><span>02</span><h3>Create RL State</h3><p>The backend converts inputs into the PPO observation format.</p></article>
+        <article><span>03</span><h3>PPO Selects Crop</h3><p>The trained policy selects one crop action.</p></article>
+        <article><span>04</span><h3>Show Results</h3><p>The app displays crop and estimated financial outcomes.</p></article>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div>
+        <span class="eyebrow">About the Project</span>
+        <h2>Farmer Crop and Income Planning using PPO</h2>
+      </div>
+      <p>
+        This project applies reinforcement learning to multi-year crop selection.
+        It considers rainfall, productivity, market price, crop rotation and
+        available savings to support long-term agricultural decision-making.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="currentYearText"></span> AgriPlan AI</p>
+    <p>HTML • CSS • JavaScript • FastAPI • PPO</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
