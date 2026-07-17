@@ -9,7 +9,7 @@ const message = document.getElementById("formMessage");
 const emptyResult = document.getElementById("emptyResult");
 const resultContent = document.getElementById("resultContent");
 
-document.getElementById("currentYearText").textContent = new Date().getFullYear();
+//document.getElementById("currentYearText").textContent = new Date().getFullYear();
 
 document.getElementById("menuButton").addEventListener("click", () => {
   document.getElementById("navLinks").classList.toggle("open");
