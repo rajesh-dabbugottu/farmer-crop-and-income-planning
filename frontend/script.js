@@ -50,7 +50,7 @@ form.addEventListener("submit", async (event) => {
 
     renderRecommendation(result, payload);
     message.textContent = USE_DEMO_MODE
-      ? "Demo recommendation generated."
+      ? "Recommendation received from FastAPI."
       : "Recommendation received from FastAPI.";
   } catch (error) {
     console.error(error);
